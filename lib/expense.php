@@ -42,16 +42,9 @@
 		public $month;
 		public $day;
 		public $week;
-		public function __construct ($date=null)
+		public function __construct ($date)
 		{
-			if ($date!==null)
-			{
-				$this->time = strtotime ($date);
-			}
-			else
-			{
-				$this->time = time();
-			}
+			$this->time = strtotime ($date);
 			$this->year = intval(date("Y",$this->time));
 			$this->month = intval(date("n",$this->time));
 			$this->day = intval(date("j",$this->time));
@@ -120,7 +113,7 @@
 			$this->day = $day;
 			$this->week = $week;
 		}
-		public function active ($date=null)
+		public function active ($date)
 		{
 			if (!is_object($date) || $date===null)
 			{

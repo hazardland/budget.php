@@ -13,7 +13,7 @@
 	/*
 		Your balance
 	*/
-	balance (668);
+	balance (636);
 
 	/*
 		SCHEDULE
@@ -31,7 +31,7 @@
 	//daily expenses
 	add ('GEL', 5, 'Taxi', 'Morning taxi', [1,2,3,4,5]);
 	add ('GEL', 0.8, 'Transport', 'Back to home', [1,2,3,4,5]);
-	add ('GEL', 9.75, 'Food', 'Food', [1,2,3,4,5]);
+	add ('GEL', 12.6, 'Food', 'Food', [1,2,3,4,5]);
 	add ('GEL', 3, 'Smoke', 'Kent');
 
 	//evening
@@ -49,6 +49,8 @@
 
 	//medic
 	add ('GEL', 55, 'Medic', 'Eye doctor', X, 30);
+
+	add ('GEL', 55, 'Medic', 'Eye doctor', X, 5, 7, 2016);
 
 
 ?>
