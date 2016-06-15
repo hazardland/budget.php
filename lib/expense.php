@@ -2,7 +2,7 @@
 
 	namespace expense;
 
-	const X = 0;
+	const X = null;
 
 	class user
 	{
@@ -42,9 +42,9 @@
 		public $month;
 		public $day;
 		public $week;
-		public function __construct ($date)
+		public function __construct ($year, $month, $day)
 		{
-			$this->time = strtotime ($date);
+			$this->time = strtotime ($year.'-'.$month.'-'.$day);
 			$this->year = intval(date("Y",$this->time));
 			$this->month = intval(date("n",$this->time));
 			$this->day = intval(date("j",$this->time));
@@ -54,9 +54,13 @@
 		{
 			return date("D", $this->time);
 		}
-		public static function now ()
+		public static function day ()
 		{
-			return date ("Y-m-d");
+			return intval(date("d"));
+		}
+		public static function now ($day=null)
+		{
+			return new self (intval(date("Y")), intval(date("m")), $day===null?intval(date("d")):$day);
 		}
 		public function set ($day)
 		{
@@ -95,7 +99,7 @@
 		public $month;
 		public $day;
 		public $week;
-		public function __construct ($currency, $value, $category, $title=null, $week=[], $day=X, $month=X, $year=X)
+		public function __construct ($currency, $value, $category, $title=null, $week=[], $day=[], $month=[], $year=[])
 		{
 
 			$this->amount = new amount ($currency, $value);
@@ -115,23 +119,30 @@
 		}
 		public function active ($date)
 		{
-			if (!is_object($date) || $date===null)
+			if ($date===null || !is_object($date))
+			{
+				return false;
+			}
+			if (!is_object($date))
 			{
 				$date = new date ($date);
 			}
-			if ($this->year!==X && $date->year!=$this->year)
+			//if ($this->year!==X && $date->year!=$this->year)
+			if ($this->year!==null && is_array($this->year) && count($this->year) && !in_array($date->year,$this->year))
 			{
 				return false;
 			}
-			if ($this->month!==X && $date->month!=$this->month)
+			//if ($this->month!==X && $date->month!=$this->month)
+			if ($this->month!==null && is_array($this->month) && count($this->month) && !in_array($date->month,$this->month))
 			{
 				return false;
 			}
-			if ($this->day!==X && $date->day!=$this->day)
+			//if ($this->day!==X && $date->day!=$this->day)
+			if ($this->day!==null && is_array($this->day) && count($this->day) && !in_array($date->day,$this->day))
 			{
 				return false;
 			}
-			if ($this->week!==X && is_array($this->week) && count($this->week) && !in_array($date->week,$this->week))
+			if ($this->week!==null && is_array($this->week) && count($this->week) && !in_array($date->week,$this->week))
 			{
 				return false;
 			}

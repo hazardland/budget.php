@@ -2,69 +2,107 @@
 
 	error_reporting (E_ALL);
 
-	//include './lib/debug/debug.php';
+	include './lib/debug/debug.php';
 	include './lib/expense.php';
 	include './lib/color.php';
 
-	const X = 0;
+	const X = null;
 
-	$user = new \expense\user ();
-
-	function add ($currency, $value, $category, $title=null, $week=[], $day=X, $month=X, $year=X)
+	//define config functions
+	function add ($currency, $value, $category, $title=null, $week=[], $day=[], $month=[], $year=[])
 	{
 		global $user;
 		$user->expense (new \expense\expense ($currency, $value, $category, $title, $week, $day, $month, $year));
 	}
-
 	function currency ($currency)
 	{
 		global $user;
 		$user->currency = $currency;
 		$user->create ();
 	}
-
 	function salary ($value)
 	{
 		global $user;
 		$user->salary ($value);
 	}
-
 	function balance ($value)
 	{
 		global $user;
 		$user->balance ($value);
 	}
 
+	//create user
 	$user = new \expense\user ();
-
-	echo "\n";
-
+	//include config
 	if (file_exists(__DIR__.'/user.php'))
 	{
 		include __DIR__.'/user.php';
 	}
 
+	//check if user was unset in config
 	if (!is_object($user))
 	{
 		echo color("user not defined\n", RED);
 		exit;
 	}
 
+	//check if user defined currency
 	if (!$user->currency)
 	{
 		echo color("currency not defined\n", RED);
 		exit;
 	}
 
+	//check if user defined expences
 	if (!is_array($user->expenses) || !count($user->expenses))
 	{
 		echo color("expenses not defined\n", RED);
 		exit;
 	}
 
+	//parse date variable input
+	$input = getopt ('d:', ['day:']);
+	debug ($input,'input');
+	$day = null;
+	if (isset($input['d']))
+	{
+		$day = $input['d'];
+	}
+	else if (isset($input['day']))
+	{
+		$day = $input['day'];
+	}
+	else if (!count($input) && isset($argv[1]))
+	{
+		$day = $argv[1];
+		debug ($argv);
+	}
+	if (isset($day))
+	{
+		if ($day[0]=='+' || $day[0]=='-')
+		{
+			$skip = $day[0]=='+'?(1):(-1);
+			$day = intval(substr($day,1));
+			if (!$day)
+			{
+				$day = 1;
+			}
+		}
+		else
+		{
+			$day = intval($day);
+		}
+		if ($day==0)
+		{
+			$day = null;
+		}
+	}
+	$now = \expense\date::now (!isset($skip)?$day:(\expense\date::day()+($skip*$day)));
+	debug ($now,'now');
+
 	//init calendar control
 	$calendar = [1=>'',2=>'',3=>'',4=>'',5=>'',6=>'',7=>''];
-	$date = new \expense\date ();
+	$date = \expense\date::now (1);
 	$date->set (1);
 	if ($date->week>1)
 	{
@@ -75,7 +113,7 @@
 	}
 
 	//calculate month average
-	$date = new \expense\date ();
+	$date = \expense\date::now ();
 	$average = 0;
 	for ($day=1; $day<=intval(date("t",time())); $day++)
 	{
@@ -93,8 +131,7 @@
 	$average = round ($average,2);
 
 	//draw calendar
-	$now = new \expense\date ();
-	$date = new \expense\date ();
+	$date = \expense\date::now ();
 	$total = 0;
 	$need = 0;
 	$categories = array ();
@@ -119,8 +156,8 @@
 		{
 			$need += $sum;
 		}
-		$calendar[$date->week] .= color(str_pad($day,2," ",STR_PAD_LEFT),MAROON)
-							   ." ".color(strtoupper($date->name()),GREEN)
+		$calendar[$date->week] .= color(str_pad($day,2," ",STR_PAD_LEFT),($date->day==$now->day)?YELLOW:MAROON)
+							   ." ".color(strtoupper($date->name()),($date->day==$now->day)?YELLOW:GREEN)
 							   ." ".color(str_pad($sum,5," ",STR_PAD_LEFT)."\t",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
 	}
 
@@ -149,7 +186,7 @@
 	$sum = 0;
 	echo "Today\n";
 	echo "-------------\n";
-	$date = new \expense\date();
+	$date = \expense\date::now ();
 	if (isset($argv[1]) && intval($argv[1]))
 	{
 		$date->set ($argv[1]);

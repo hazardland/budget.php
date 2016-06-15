@@ -13,7 +13,7 @@
 	/*
 		Your balance
 	*/
-	balance (636);
+	balance (629);
 
 	/*
 		SCHEDULE
@@ -29,10 +29,12 @@
 
 
 	//daily expenses
+	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Morning taxi', [1,2,3,4,5]);
-	add ('GEL', 0.8, 'Transport', 'Back to home', [1,2,3,4,5]);
-	add ('GEL', 12.6, 'Food', 'Food', [1,2,3,4,5]);
 	add ('GEL', 3, 'Smoke', 'Kent');
+	add ('GEL', 12.6, 'Food', 'Wendy', [1,2,3,4,5]);
+	add ('GEL', 2.5, 'Food', 'Evening Food', [1,2,3,4,5]);
+	add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
 
 	//evening
 	add ('GEL', 3.6, 'Beer', null, [2,4,6]);
@@ -42,15 +44,17 @@
 	add ('GEL', 5, 'Friday', 'Drunk Taxi', [5]);
 
 	//weekend
-	add ('GEL', 20, 'Food', 'Pizza', [7]);
+	add ('GEL', 10, 'Food', 'Hangover', [6]);
+	add ('GEL', 20, 'Food', 'Pizza', X, [19,26]);
 
 	//monthly expenses
-	add ('GEL', 14, 'It', 'Github', X, 5);
+	add ('GEL', 14, 'IT', 'Github', X, [5]);
 
 	//medic
-	add ('GEL', 55, 'Medic', 'Eye doctor', X, 30);
+	add ('GEL', 55, 'Medic', 'Eye doctor', X, [26]);
 
-	add ('GEL', 55, 'Medic', 'Eye doctor', X, 5, 7, 2016);
+	//IT Upcoming
+	add ('GEL', 30, 'IT', 'Domain hiking.ge', X, [5], [7], [2016]);
 
 
 ?>
