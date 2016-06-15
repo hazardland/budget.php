@@ -33,7 +33,7 @@
 	add ('GEL', 5, 'Taxi', 'Morning taxi', [1,2,3,4,5]);
 	add ('GEL', 3, 'Smoke', 'Kent');
 	add ('GEL', 12.6, 'Food', 'Wendy', [1,2,3,4,5]);
-	add ('GEL', 2.5, 'Food', 'Evening Food', [1,2,3,4,5]);
+	add ('GEL', 2, 'Food', 'Evening Food', [1,2,3,4,5],[15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],[6]);
 	add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
 
 	//evening
