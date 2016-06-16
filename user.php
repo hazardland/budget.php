@@ -6,14 +6,14 @@
 	currency ('GEL');
 
 	/*
-		Your monthly salary
+		Your monthly budget
 	*/
-	salary (800);
+	budget (800);
 
 	/*
 		Your balance
 	*/
-	balance (629);
+	balance (614);
 
 	/*
 		SCHEDULE

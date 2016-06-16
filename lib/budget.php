@@ -1,24 +1,24 @@
 <?php
 
-	namespace expense;
+	namespace budget;
 
 	const X = null;
 
 	class user
 	{
 		public $currency;
-		public $salary;
+		public $budget;
 		public $balance;
 		public $expenses = array ();
 		public function __construct ($currency=null)
 		{
 			$this->currency = $currency;
-			$this->salary = new amount ($currency);
+			$this->budget = new amount ($currency);
 			$this->balance = new amount ($currency);
 		}
 		public function create ()
 		{
-			$this->salary->currency = $this->currency;
+			$this->budget->currency = $this->currency;
 			$this->balance->currency = $this->currency;
 		}
 		public function expense (expense $expense)
@@ -29,9 +29,9 @@
 		{
 			$this->balance->value = $value;
 		}
-		public function salary ($value)
+		public function budget ($value)
 		{
-			$this->salary->value = $value;
+			$this->budget->value = $value;
 		}
 	}
 

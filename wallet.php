@@ -3,7 +3,7 @@
 	error_reporting (E_ALL);
 
 	include './lib/debug/debug.php';
-	include './lib/expense.php';
+	include './lib/budget.php';
 	include './lib/color.php';
 
 	const X = null;
@@ -12,7 +12,7 @@
 	function add ($currency, $value, $category, $title=null, $week=[], $day=[], $month=[], $year=[])
 	{
 		global $user;
-		$user->expense (new \expense\expense ($currency, $value, $category, $title, $week, $day, $month, $year));
+		$user->expense (new \budget\expense ($currency, $value, $category, $title, $week, $day, $month, $year));
 	}
 	function currency ($currency)
 	{
@@ -20,10 +20,10 @@
 		$user->currency = $currency;
 		$user->create ();
 	}
-	function salary ($value)
+	function budget ($value)
 	{
 		global $user;
-		$user->salary ($value);
+		$user->budget ($value);
 	}
 	function balance ($value)
 	{
@@ -32,7 +32,7 @@
 	}
 
 	//create user
-	$user = new \expense\user ();
+	$user = new \budget\user ();
 	//include config
 	if (file_exists(__DIR__.'/user.php'))
 	{
@@ -62,7 +62,7 @@
 
 	//parse date variable input
 	$input = getopt ('d:', ['day:']);
-	debug ($input,'input');
+	//debug ($input,'input');
 	$day = null;
 	if (isset($input['d']))
 	{
@@ -75,7 +75,7 @@
 	else if (!count($input) && isset($argv[1]))
 	{
 		$day = $argv[1];
-		debug ($argv);
+		//debug ($argv);
 	}
 	if (isset($day))
 	{
@@ -97,12 +97,12 @@
 			$day = null;
 		}
 	}
-	$now = \expense\date::now (!isset($skip)?$day:(\expense\date::day()+($skip*$day)));
-	debug ($now,'now');
+	$now = \budget\date::now (!isset($skip)?$day:(\budget\date::day()+($skip*$day)));
+	//debug ($now,'now');
 
 	//init calendar control
 	$calendar = [1=>'',2=>'',3=>'',4=>'',5=>'',6=>'',7=>''];
-	$date = \expense\date::now (1);
+	$date = \budget\date::now (1);
 	$date->set (1);
 	if ($date->week>1)
 	{
@@ -113,7 +113,7 @@
 	}
 
 	//calculate month average
-	$date = \expense\date::now ();
+	$date = \budget\date::now ();
 	$average = 0;
 	for ($day=1; $day<=intval(date("t",time())); $day++)
 	{
@@ -131,9 +131,10 @@
 	$average = round ($average,2);
 
 	//draw calendar
-	$date = \expense\date::now ();
+	$date = \budget\date::now ();
 	$total = 0;
 	$need = 0;
+	$used = 0;
 	$categories = array ();
 	for ($day=1; $day<=intval(date("t",time())); $day++)
 	{
@@ -152,7 +153,11 @@
 			}
 		}
 		$total += $sum;
-		if ($date->day>$now->day)
+		if ($date->day<$now->day)
+		{
+			$used += $sum;
+		}
+		if ($date->day>=$now->day)
 		{
 			$need += $sum;
 		}
@@ -175,18 +180,30 @@
 
 	echo "\n\n";
 
-	echo "Average ".color($average,RED)."\n";
-	echo "Total ".color($total,CYAN)."\n";
-	echo "Current ".color($user->balance->value,BROWN)."\n";
-	echo "Need ".color($need,RED)."\n";
-	echo "Planned ".color(($user->salary->value-$total),RED)."\n";
-	echo "Profit ".color(($user->balance->value-$need),GREEN)."\n";
+	//echo "Daily Average ".color($average,RED)."\n";
+	//echo "Budget ".color($user->budget->value,GREEN)."\n";
+	//echo "Balance ".color($user->balance->value,BROWN)."\n";
+	echo "Total budged plan is ".color($total,CYAN).", from given date ".color($need,RED)."\n\n";
+	//echo "Used ".color($used,RED)."\n";
+
+
+	echo str_pad(" ",8)."Expected | Current\n";
+	echo str_pad("Balance",8)." "
+		 .color(str_pad($user->budget->value-$used,7," ",STR_PAD_LEFT),RED)." | "
+		 .color(str_pad($user->balance->value,7," ",STR_PAD_LEFT),RED)."\n";
+	echo str_pad("Expense",8)." "
+		 .color(str_pad($used,7," ",STR_PAD_LEFT),RED)." | "
+		 .color(str_pad($user->budget->value-$user->balance->value,7," ",STR_PAD_LEFT),RED)."\n";
+	echo str_pad("Revenue",8)." "
+		 .color(str_pad(round($user->budget->value-$total,2),7," ",STR_PAD_LEFT),RED)." | "
+		 .color(str_pad(round($user->balance->value-$need,2),7," ",STR_PAD_LEFT),GREEN)."\n";
+
 
 	echo "\n";
 	$sum = 0;
 	echo "Today\n";
 	echo "-------------\n";
-	$date = \expense\date::now ();
+	$date = \budget\date::now ($now->day);
 	if (isset($argv[1]) && intval($argv[1]))
 	{
 		$date->set ($argv[1]);
@@ -199,10 +216,10 @@
 			$sum += $item->amount->convert($user->currency)->value;
 			echo $item->title." "
 			    .$item->amount->currency." "
-			    .$item->amount->value."\n";
+			    .$item->amount->value." | ";
 		}
 	}
-	echo "-------------\n";
+	echo "\n-------------\n";
 	echo $user->currency." ".$sum;
 	echo "\n";
 	echo "\n";
