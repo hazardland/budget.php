@@ -166,6 +166,7 @@
 							   ." ".color(str_pad($sum,5," ",STR_PAD_LEFT)."\t",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
 	}
 
+	echo "\n";
 	foreach ($calendar as $item)
 	{
 		echo $item."\n";
@@ -225,8 +226,5 @@
 	echo color("\n-------------\n",GRAY);
 	echo color($user->currency." ".$sum,GRAY);
 	echo "\n";
-	echo "\n";
-
-
 
 ?>
