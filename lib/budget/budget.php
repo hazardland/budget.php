@@ -50,9 +50,9 @@
 			$this->day = intval(date("j",$this->time));
 			$this->week = intval(date("N",$this->time));
 		}
-		public function name ()
+		public function name ($full=false)
 		{
-			return date("D", $this->time);
+			return date($full?"l":"D", $this->time);
 		}
 		public static function day ()
 		{

@@ -2,9 +2,9 @@
 
 	error_reporting (E_ALL);
 
+	include './lib/console/console.php';
 	include './lib/debug/debug.php';
-	include './lib/budget.php';
-	include './lib/color.php';
+	include './lib/budget/budget.php';
 
 	const X = null;
 
@@ -175,35 +175,38 @@
 	arsort ($categories);
 	foreach ($categories as $name => $value)
 	{
-		echo color($name,CYAN)." ".color($value,RED)."  ";
+		echo color($name,CYAN)." ".color($value,RED)." | ";
 	}
 
 	echo "\n\n";
 
-	//echo "Daily Average ".color($average,RED)."\n";
-	//echo "Budget ".color($user->budget->value,GREEN)."\n";
-	//echo "Balance ".color($user->balance->value,BROWN)."\n";
-	echo "Total budged plan is ".color($total,CYAN).", from given date ".color($need,RED)."\n\n";
-	//echo "Used ".color($used,RED)."\n";
+
+/*	$table = new table ();
+	$table->header ("test");
+	$table->header ("test2");
+	$table->row ();
+	$table->column ("dasdsa");
+	$table->column ("dasdsa");
+	echo $table->render ();
+*/
+	echo "Budget ".color($user->budget->value,BLUE)." | ";
+	echo "Planned ".color($total,BLUE)." | ";
+	echo "Current ".color($user->balance->value,RED)." | ";
+	echo "Used ".color($user->budget->value-$user->balance->value,NAVY)." | ";
+	echo "Saved ".color($used-($user->budget->value-$user->balance->value),NAVY)." | ";
+	echo "Need ".color($need,RED)." | ";
+	echo "Free ".color(round($user->balance->value-$need,2),GREEN)." ";
 
 
-	echo str_pad(" ",8)."Expected | Current\n";
-	echo str_pad("Balance",8)." "
-		 .color(str_pad($user->budget->value-$used,7," ",STR_PAD_LEFT),RED)." | "
-		 .color(str_pad($user->balance->value,7," ",STR_PAD_LEFT),RED)."\n";
-	echo str_pad("Expense",8)." "
-		 .color(str_pad($used,7," ",STR_PAD_LEFT),RED)." | "
-		 .color(str_pad($user->budget->value-$user->balance->value,7," ",STR_PAD_LEFT),RED)."\n";
-	echo str_pad("Revenue",8)." "
-		 .color(str_pad(round($user->budget->value-$total,2),7," ",STR_PAD_LEFT),RED)." | "
-		 .color(str_pad(round($user->balance->value-$need,2),7," ",STR_PAD_LEFT),GREEN)."\n";
+
+	echo "\n";
 
 
 	echo "\n";
 	$sum = 0;
-	echo "Today\n";
-	echo "-------------\n";
 	$date = \budget\date::now ($now->day);
+	echo color("For ".$date->name(true)." \n",GRAY);
+	echo color("-------------\n",GRAY);
 	if (isset($argv[1]) && intval($argv[1]))
 	{
 		$date->set ($argv[1]);
@@ -214,15 +217,16 @@
 		{
 			//debug ($item,true);
 			$sum += $item->amount->convert($user->currency)->value;
-			echo $item->title." "
+			echo color($item->title." "
 			    .$item->amount->currency." "
-			    .$item->amount->value." | ";
+			    .$item->amount->value." | ", GRAY);
 		}
 	}
-	echo "\n-------------\n";
-	echo $user->currency." ".$sum;
+	echo color("\n-------------\n",GRAY);
+	echo color($user->currency." ".$sum,GRAY);
 	echo "\n";
 	echo "\n";
+
 
 
 ?>
