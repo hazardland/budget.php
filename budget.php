@@ -190,13 +190,13 @@
 	$table->column ("dasdsa");
 	echo $table->render ();
 */
-	echo "Budget ".color($user->budget->value,BLUE)." | ";
-	echo "Planned ".color($total,BLUE)." | ";
-	echo "Current ".color($user->balance->value,RED)." | ";
+	echo color("Budget",SILVER)." ".color($user->budget->value,BLUE)." | ";
+	echo color("Planned",SILVER)." ".color($total,BLUE)." | ";
+	echo color("Current",SILVER)." ".color($user->balance->value,RED)." | ";
 	echo "Used ".color($user->budget->value-$user->balance->value,NAVY)." | ";
 	echo "Saved ".color($used-($user->budget->value-$user->balance->value),NAVY)." | ";
 	echo "Need ".color($need,RED)." | ";
-	echo "Free ".color(round($user->balance->value-$need,2),GREEN)." ";
+	echo color("Free",YELLOW)." ".color(round($user->balance->value-$need,2),GREEN)." ";
 
 
 
