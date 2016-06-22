@@ -13,7 +13,7 @@
 	/*
 		Your balance
 	*/
-	balance (498);
+	balance (322);
 	//balance (779.8);
 
 	/*
@@ -38,7 +38,7 @@
 	add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
 
 	//hygiene
-	add ('GEL', 6.6, 'Hygiene', 'Deodorant', X, [23]);
+	add ('GEL', 6.6, 'Hygiene', 'Deodorant', X, [20]);
 
 	//evening
 	add ('GEL', 3.6, 'Beer', null, [2,4,6]);
