@@ -1,5 +1,7 @@
 <?php
 
+	$range = \budget\date::range ("2016-06-03","2016-06-30");
+
 	/*
 		define your main currency
 	*/
@@ -13,7 +15,7 @@
 	/*
 		Your balance
 	*/
-	balance (290);
+	balance (125);
 	//balance (779.8);
 
 	/*
@@ -32,6 +34,7 @@
 	//daily expenses
 	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Go to work', [1,2,3,4,5]);
+	//add ('GEL', 3, 'Smoke', 'Kent', X, [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,24,26]);
 	add ('GEL', 3, 'Smoke', 'Kent');
 	add ('GEL', 12.6, 'Food', 'Wendy', [1,2,3,4,5]);
 	add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5],[15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],[6]);
@@ -55,7 +58,7 @@
 	add ('GEL', 14, 'Interent', 'Github', X, [5]);
 
 	//medic
-	add ('GEL', 55, 'Medic', 'Eye doctor', X, [26]);
+	add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [7]);
 
 	//IT Upcoming
 	add ('GEL', 30, 'Internet', 'Domain hiking.ge', X, [5], [7], [2016]);

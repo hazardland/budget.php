@@ -70,6 +70,18 @@
 			$this->day = intval(date("j",$this->time));
 			$this->week = intval(date("N",$this->time));
 		}
+		public static function range ($from, $to)
+		{
+			$result = array ();
+			$from = strtotime ($from);
+			$to = strtotime ($to);
+			for ($time=$from;$time<=$to;$time=$time+24*60*60)
+			{
+				$date = new self (intval(date("Y",$time)),intval(date("n",$time)),intval(date("j",$time)));
+				$result[$date->year.'-'.$date->month.'-'.$date->day] = $date;
+			}
+			return $result;
+		}
 	}
 
 	class amount
@@ -155,6 +167,37 @@
 				return new amount ($this->currency, $this->value);
 			}
 			return null;
+		}
+	}
+
+	class entry
+	{
+		public $value;
+		public $count;
+		public function __construct ()
+		{
+			$this->value = 0;
+			$this->count = 0;
+		}
+		public function add ($value)
+		{
+			$this->value += $value;
+			$this->count ++;
+		}
+	}
+
+	class sum
+	{
+		public $name;
+		public $total;
+		public $used;
+		public $need;
+		public function __construct ($name=null)
+		{
+			$this->name = $name;
+			$this->total = new entry();
+			$this->used = new entry();
+			$this->need = new entry();
 		}
 	}
 

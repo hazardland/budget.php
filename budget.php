@@ -97,13 +97,13 @@
 			$day = null;
 		}
 	}
+
 	$now = \budget\date::now (!isset($skip)?$day:(\budget\date::day()+($skip*$day)));
 	//debug ($now,'now');
 
 	//init calendar control
 	$calendar = [1=>'',2=>'',3=>'',4=>'',5=>'',6=>'',7=>''];
-	$date = \budget\date::now (1);
-	$date->set (1);
+	$date = reset($range);
 	if ($date->week>1)
 	{
 		for ($day=1; $day<$date->week; $day++)
@@ -113,12 +113,10 @@
 	}
 
 	//calculate month average
-	$date = \budget\date::now ();
 	$average = 0;
-	for ($day=1; $day<=intval(date("t",time())); $day++)
+	foreach ($range as $date)
 	{
 		$sum = 0;
-		$date->set ($day);
 		foreach ($user->expenses as $item)
 		{
 			if ($item->active($date))
@@ -131,38 +129,45 @@
 	$average = round ($average,2);
 
 	//draw calendar
-	$date = \budget\date::now ();
-	$total = 0;
-	$need = 0;
-	$used = 0;
+	$sums = new \budget\sum();
+	$sums->total = 0;
+	$sums->need = 0;
+	$sums->used = 0;
 	$categories = array ();
-	for ($day=1; $day<=intval(date("t",time())); $day++)
+	foreach ($range as $date)
 	{
 		$sum = 0;
-		$date->set ($day);
 		foreach ($user->expenses as $item)
 		{
 			if ($item->active($date))
 			{
 				if (!isset($categories[$item->category]))
 				{
-					$categories[$item->category] = 0;
+					$categories[$item->category] = new \budget\sum($item->category);
 				}
-				$categories[$item->category] += $item->amount->convert($user->currency)->value;
+				$categories[$item->category]->total->add ($item->amount->convert($user->currency)->value);
+				if ($date->time<$now->time)
+				{
+					$categories[$item->category]->used->add ($item->amount->convert($user->currency)->value);
+				}
+				if ($date->time>=$now->time)
+				{
+					$categories[$item->category]->need->add ($item->amount->convert($user->currency)->value);
+				}
 				$sum += $item->amount->convert($user->currency)->value;
 			}
 		}
-		$total += $sum;
-		if ($date->day<$now->day)
+		$sums->total += $sum;
+		if ($date->time<$now->time)
 		{
-			$used += $sum;
+			$sums->used += $sum;
 		}
-		if ($date->day>=$now->day)
+		if ($date->time>=$now->time)
 		{
-			$need += $sum;
+			$sums->need += $sum;
 		}
-		$calendar[$date->week] .= color(str_pad($day,2," ",STR_PAD_LEFT),($date->day==$now->day)?YELLOW:MAROON)
-							   ." ".color(strtoupper($date->name()),($date->day==$now->day)?YELLOW:GREEN)
+		$calendar[$date->week] .= color(str_pad($date->day,2," ",STR_PAD_LEFT),($date->time==$now->time)?YELLOW:MAROON)
+							   ." ".color(strtoupper($date->name()),($date->time==$now->time)?YELLOW:GREEN)
 							   ." ".color(str_pad($sum,5," ",STR_PAD_LEFT)."\t",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
 	}
 
@@ -173,31 +178,30 @@
 	}
 
 	echo "\n";
-	arsort ($categories);
-	foreach ($categories as $name => $value)
+	$data = array ();
+	//arsort ($categories);
+	$data['name'][] = '';
+	$data['total'][] = 'Total';
+	$data['need'][] = 'Need';
+	foreach ($categories as $item)
 	{
-		echo color($name,CYAN)." ".color($value,RED)." | ";
+		$data['name'][] = color ($item->name,CYAN);
+		$data['total'][] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
+		$data['need'][] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
 	}
+	echo table ($data);
+	echo "\n";
 
-	echo "\n\n";
 
-
-/*	$table = new table ();
-	$table->header ("test");
-	$table->header ("test2");
-	$table->row ();
-	$table->column ("dasdsa");
-	$table->column ("dasdsa");
-	echo $table->render ();
-*/
-	echo color("Budget",SILVER)." ".color($user->budget->value,BLUE)." | ";
-	echo color("Planned",SILVER)." ".color($total,BLUE)." | ";
-	echo color("Current",SILVER)." ".color($user->balance->value,RED)." | ";
-	echo "Used ".color($user->budget->value-$user->balance->value,NAVY)." | ";
-	echo "Saved ".color($used-($user->budget->value-$user->balance->value),NAVY)." | ";
-	echo "Need ".color($need,RED)." | ";
-	echo color("Free",YELLOW)." ".color(round($user->balance->value-$need,2),GREEN)." ";
-
+	$data = array ();
+	$data[0][] = color("Budget",SILVER)." ".color($user->budget->value,BLUE);
+	$data[0][] = color("Planned",SILVER)." ".color($sums->total,BLUE);
+	$data[0][] = color("Current",SILVER)." ".color($user->balance->value,RED);
+	$data[0][] = "Used ".color($user->budget->value-$user->balance->value,NAVY);
+	$data[0][] = "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY);
+	$data[0][] = "Need ".color($sums->need,RED);
+	$data[0][] = color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN);
+	echo table ($data);
 
 
 	echo "\n";
