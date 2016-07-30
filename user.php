@@ -1,5 +1,11 @@
 <?php
 
+
+	if (!date_default_timezone_get())
+	{
+	    date_default_timezone_set('Asia/Tbilisi');
+	}
+
 	$range = \budget\date::range ("2016-07-07","2016-08-03");
 
 	/*
@@ -10,12 +16,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (1790);
+	budget (978);
 
 	/*
 		Your balance
 	*/
-	balance (1675);
+	balance (978);
 	//balance (779.8);
 
 	/*
@@ -57,17 +63,17 @@
 	add ('GEL', 14, 'Interent', 'Github', X, [5]);
 
 	//medic
-	add ('GEL', 55, 'Medic', 'Eye doctor', X, [9], [7]);
+	add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [8]);
 
 	//IT Upcoming
 	add ('GEL', 30, 'Internet', 'Domain hiking.ge', X, [5], [7], [2016]);
 
-	add ('GEL', 200, 'Misc', 'Ganbajeba', X, [19], [7]);
+	add ('GEL', 180, 'Misc', 'Ganbajeba', X, [1], [8]);
 
 
 
 	//add ('GEL', 1700, 'Moped', null, X, [7], [7]);
-	add ('GEL', 150, 'Mshobleb', null, X, [7], [7]);
+	add ('GEL', 150, 'Mshobleb', null, X, [1], [8]);
 
 
 
