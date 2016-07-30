@@ -1,11 +1,5 @@
 <?php
 
-
-	if (!date_default_timezone_get())
-	{
-	    date_default_timezone_set('Asia/Tbilisi');
-	}
-
 	$range = \budget\date::range ("2016-07-07","2016-08-03");
 
 	/*

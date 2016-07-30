@@ -1,5 +1,11 @@
 <?php
 
+	if (!date_default_timezone_get())
+	{
+	    date_default_timezone_set('Asia/Tbilisi');
+	}
+
+
 	error_reporting (E_ALL);
 
 	include './lib/console/console.php';
