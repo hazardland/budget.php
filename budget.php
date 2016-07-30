@@ -209,9 +209,6 @@
 
 
 	echo "\n";
-
-
-	echo "\n";
 	$sum = 0;
 	$date = \budget\date::now ($now->day);
 	echo color("For ".$date->name(true)." \n",GRAY);
