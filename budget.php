@@ -196,13 +196,13 @@
 
 
 	$data = array ();
-	$data[0][] = color("Budget",SILVER)." ".color($user->budget->value,BLUE);
-	$data[0][] = color("Planned",SILVER)." ".color($sums->total,BLUE);
-	$data[0][] = color("Current",SILVER)." ".color($user->balance->value,RED);
-	$data[0][] = "Used ".color($user->budget->value-$user->balance->value,NAVY);
-	$data[0][] = "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY);
-	$data[0][] = "Need ".color($sums->need,RED);
-	$data[0][] = color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN);
+	$data[] = color("Budget",SILVER)." ".color($user->budget->value,BLUE);
+	$data[] = color("Planned",SILVER)." ".color($sums->total,BLUE);
+	$data[] = color("Current",SILVER)." ".color($user->balance->value,RED);
+	$data[] = "Used ".color($user->budget->value-$user->balance->value,NAVY);
+	$data[] = "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY);
+	$data[] = "Need ".color($sums->need,RED);
+	$data[] = color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN);
 	echo table ($data);
 
 
