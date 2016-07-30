@@ -182,28 +182,30 @@
 	echo "\n";
 	$data = array ();
 	//arsort ($categories);
-	$data['name'][] = '';
-	$data['total'][] = 'Total';
-	$data['need'][] = 'Need';
+	$data[0][0] = '';
+	$data[0][1] = 'Total';
+	$data[0][2] = 'Need';
 	foreach ($categories as $item)
 	{
-		$data['name'][] = color ($item->name,CYAN);
-		$data['total'][] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
-		$data['need'][] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
+		$row = array ();
+		$row[0] = color ($item->name,CYAN);
+		$row[1] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
+		$row[2] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
+		$data[] = $row;
 	}
 	echo table ($data);
 	echo "\n";
 
 
-	$data = array ();
-	$data[] = color("Budget",SILVER)." ".color($user->budget->value,BLUE);
-	$data[] = color("Planned",SILVER)." ".color($sums->total,BLUE);
-	$data[] = color("Current",SILVER)." ".color($user->balance->value,RED);
-	$data[] = "Used ".color($user->budget->value-$user->balance->value,NAVY);
-	$data[] = "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY);
-	$data[] = "Need ".color($sums->need,RED);
-	$data[] = color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN);
-	echo table ($data);
+	$data = "";
+	$data .= color("Budget",SILVER)." ".color($user->budget->value,BLUE)."\n";
+	$data .= color("Planned",SILVER)." ".color($sums->total,BLUE)."\n";
+	$data .= color("Current",SILVER)." ".color($user->balance->value,RED)."\n";
+	$data .= "Used ".color($user->budget->value-$user->balance->value,NAVY)."\n";
+	$data .= "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY)."\n";
+	$data .= "Need ".color($sums->need,RED)."\n";
+	$data .= color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN)."\n";
+	echo $data;
 
 
 	echo "\n";
