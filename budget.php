@@ -110,7 +110,7 @@
 	{
 		for ($day=1; $day<$date->week; $day++)
 		{
-			$calendar[$day] = "             ";
+			$calendar[$day] = "           ";
 		}
 	}
 
@@ -169,7 +169,7 @@
 			$sums->need += $sum;
 		}
 		$calendar[$date->week] .= color(str_pad($date->day,2," ",STR_PAD_LEFT),($date->time==$now->time)?YELLOW:MAROON)
-							   ." ".color(strtoupper($date->name()),($date->time==$now->time)?YELLOW:GREEN)
+							   ." ".color(strtoupper($date->name()[0]),($date->time==$now->time)?YELLOW:GREEN)
 							   ." ".color(str_pad($sum,4," ",STR_PAD_LEFT)."  ",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
 	}
 
