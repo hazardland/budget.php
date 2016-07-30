@@ -10,12 +10,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (968);
+	budget (1790);
 
 	/*
 		Your balance
 	*/
-	balance (968);
+	balance (1675);
 	//balance (779.8);
 
 	/*
@@ -62,9 +62,12 @@
 	//IT Upcoming
 	add ('GEL', 30, 'Internet', 'Domain hiking.ge', X, [5], [7], [2016]);
 
+	add ('GEL', 200, 'Misc', 'Ganbajeba', X, [19], [7]);
+
+
 
 	//add ('GEL', 1700, 'Moped', null, X, [7], [7]);
-	//add ('GEL', 150, 'Mshobleb', null, X, [7], [7]);
+	add ('GEL', 150, 'Mshobleb', null, X, [7], [7]);
 
 
 
