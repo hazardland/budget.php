@@ -1,6 +1,6 @@
 <?php
 
-	$range = \budget\date::range ("2016-07-07","2016-08-03");
+	$range = \budget\date::range ("2016-11-01","2016-12-01");
 
 	/*
 		define your main currency
@@ -10,12 +10,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (978);
+	budget (350);
 
 	/*
 		Your balance
 	*/
-	balance (978);
+	balance (350);
 	//balance (779.8);
 
 	/*
@@ -35,12 +35,12 @@
 	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 3, 'Smoke', 'Kent');
-	add ('GEL', 12.6, 'Food', 'Wendy', [1,2,3,4,5]);
-	add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5]);
-	add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
+	add ('GEL', 15.05, 'Food', 'Wendy', [1,2,3,4,5]);
+	//add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5]);
+	add ('GEL', 5, 'Taxi', 'Back to home', [1,2,3,4,5]);
 
 	//hygiene
-	add ('GEL', 6.6, 'Hygiene', 'Deodorant', X, [20]);
+	//add ('GEL', 6.6, 'Hygiene', 'Deodorant', X, [20]);
 
 	//evening
 	add ('GEL', 3.6, 'Beer', null, [2,4,6]);
@@ -57,17 +57,17 @@
 	add ('GEL', 14, 'Interent', 'Github', X, [5]);
 
 	//medic
-	add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [8]);
+	//add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [8]);
 
 	//IT Upcoming
-	add ('GEL', 30, 'Internet', 'Domain hiking.ge', X, [5], [7], [2016]);
+	//add ('GEL', 30, 'Internet', 'Domain hiking.ge', X, [5], [7], [2016]);
 
-	add ('GEL', 180, 'Misc', 'Ganbajeba', X, [1], [8]);
+	//add ('GEL', 180, 'Misc', 'Ganbajeba', X, [1], [8]);
 
 
 
 	//add ('GEL', 1700, 'Moped', null, X, [7], [7]);
-	add ('GEL', 150, 'Mshobleb', null, X, [1], [8]);
+	//add ('GEL', 150, 'Mshobleb', null, X, [1], [8]);
 
 
 

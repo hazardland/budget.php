@@ -110,7 +110,7 @@
 	{
 		for ($day=1; $day<$date->week; $day++)
 		{
-			$calendar[$day] = "           ";
+			$calendar[$day] = "              ";
 		}
 	}
 
@@ -169,8 +169,8 @@
 			$sums->need += $sum;
 		}
 		$calendar[$date->week] .= color(str_pad($date->day,2," ",STR_PAD_LEFT),($date->time==$now->time)?YELLOW:MAROON)
-							   ." ".color(strtoupper($date->name()[0]),($date->time==$now->time)?YELLOW:GREEN)
-							   ." ".color(str_pad($sum,4," ",STR_PAD_LEFT)."  ",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
+							   ." ".color(strtoupper($date->name()),($date->time==$now->time)?YELLOW:GREEN)
+							   ." ".color(str_pad($sum,5," ",STR_PAD_LEFT)."  ",$sum>$average?RED:($sum>($average/2)?SILVER:GRAY));
 	}
 
 	echo "\n";
@@ -179,36 +179,68 @@
 		echo $item."\n";
 	}
 
-	echo "\n";
+	// echo "\n";
+	// $data = array ();
+	// //arsort ($categories);
+	// $data[0][0] = '';
+	// $data[0][1] = 'Total';
+	// $data[0][2] = 'Need';
+	// foreach ($categories as $item)
+	// {
+	// 	$row = array ();
+	// 	$row[0] = color ($item->name,CYAN);
+	// 	$row[1] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
+	// 	$row[2] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
+	// 	$data[] = $row;
+	// }
+	// echo table ($data);
+	// echo "\n";
+
 	$data = array ();
-	//arsort ($categories);
 	$data[0][0] = '';
-	$data[0][1] = 'Total';
-	$data[0][2] = 'Need';
+	$data[1][0] = 'Total';
+	$data[2][0] = 'Need';
+	$row = 0;
 	foreach ($categories as $item)
 	{
-		$row = array ();
-		$row[0] = color ($item->name,CYAN);
-		$row[1] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
-		$row[2] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
-		$data[] = $row;
+		$row++;
+		$data[0][$row] = color ($item->name,CYAN);
+		$data[1][$row] = color($item->total->count."x", YELLOW)." ".color($item->total->value,RED);
+		$data[2][$row] = $item->need->count?color($item->need->count."x", YELLOW)." ".color($item->need->value,RED):'';
 	}
 	echo table ($data);
-	echo "\n";
+	//echo "\n";
+	// $data = "";
+	// $data .= color("Budget",SILVER)." ".color($user->budget->value,BLUE)."\n";
+	// $data .= color("Planned",SILVER)." ".color($sums->total,BLUE)."\n";
+	// $data .= color("Current",SILVER)." ".color($user->balance->value,RED)."\n";
+	// $data .= "Used ".color($user->budget->value-$user->balance->value,NAVY)."\n";
+	// $data .= "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY)."\n";
+	// $data .= "Need ".color($sums->need,RED)."\n";
+	// $data .= color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN)."\n";
+	// echo $data;
+
+	$data = array ();
+	$data[0][0] = color("Budget",SILVER);
+	$data[0][1] = color("Planned",SILVER);
+	$data[0][2] = color("Current",SILVER);
+	$data[0][3] = "Used";
+	$data[0][4] = "Saved";
+	$data[0][5] = "Need";
+	$data[0][4] = color("Free",YELLOW);
+
+	$data[1][0] = color($user->budget->value,BLUE);
+	$data[1][1] = color($sums->total,BLUE);
+	$data[1][2] = color($user->balance->value,RED);
+	$data[1][3] = color($user->budget->value-$user->balance->value,NAVY);
+	$data[1][4] = color($sums->used-($user->budget->value-$user->balance->value),NAVY);
+	$data[1][5] = color($sums->need,RED);
+	$data[1][4] = color(round($user->balance->value-$sums->need,2),GREEN);
+	echo table ($data);
+	//echo "\n";
 
 
-	$data = "";
-	$data .= color("Budget",SILVER)." ".color($user->budget->value,BLUE)."\n";
-	$data .= color("Planned",SILVER)." ".color($sums->total,BLUE)."\n";
-	$data .= color("Current",SILVER)." ".color($user->balance->value,RED)."\n";
-	$data .= "Used ".color($user->budget->value-$user->balance->value,NAVY)."\n";
-	$data .= "Saved ".color($sums->used-($user->budget->value-$user->balance->value),NAVY)."\n";
-	$data .= "Need ".color($sums->need,RED)."\n";
-	$data .= color("Free",YELLOW)." ".color(round($user->balance->value-$sums->need,2),GREEN)."\n";
-	echo $data;
-
-
-	echo "\n";
+	//echo "\n";
 	$sum = 0;
 	$date = \budget\date::now ($now->day);
 	echo color("For ".$date->name(true)." \n",GRAY);
