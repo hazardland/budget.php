@@ -10,7 +10,7 @@
 	/*
 		Your monthly budget
 	*/
-	budget (350);
+	budget (1000);
 
 	/*
 		Your balance
@@ -30,13 +30,15 @@
 					  int$year=X)
 	*/
 
+	//Currency, Amount, Category, Title, Week, Day, Month, Year
 
 	//daily expenses
 	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 3, 'Smoke', 'Kent');
-	add ('GEL', 15.05, 'Food', 'Wendy', [1,2,3,4,5]);
+	add ('GEL', 15.05, 'Food', 'Subway', [1,2,3,4,5]);
 	//add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5]);
+	//add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Back to home', [1,2,3,4,5]);
 
 	//hygiene
