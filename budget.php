@@ -222,20 +222,34 @@
 
 	$data = array ();
 	$data[0][0] = color("Budget",SILVER);
-	$data[0][1] = color("Planned",SILVER);
-	$data[0][2] = color("Current",SILVER);
-	$data[0][3] = "Used";
-	$data[0][4] = "Saved";
-	$data[0][5] = "Need";
-	$data[0][4] = color("Free",YELLOW);
+	$data[1][0] = color($user->budget->value,BLUE); //Budget
 
-	$data[1][0] = color($user->budget->value,BLUE);
-	$data[1][1] = color($sums->total,BLUE);
-	$data[1][2] = color($user->balance->value,RED);
-	$data[1][3] = color($user->budget->value-$user->balance->value,NAVY);
-	$data[1][4] = color($sums->used-($user->budget->value-$user->balance->value),NAVY);
-	$data[1][5] = color($sums->need,RED);
-	$data[1][4] = color(round($user->balance->value-$sums->need,2),GREEN);
+	$data[0][1] = color("Planned",SILVER);
+	$data[1][1] = color($sums->total,BLUE); //Planned
+	
+	$data[0][2] = color("Current",SILVER);
+	$data[1][2] = color($user->balance->value,RED); //Current
+	
+	$data[0][3] = "Used";
+	$data[1][3] = color($user->budget->value-$user->balance->value,NAVY); //Used
+
+	$data[0][4] = "Required";
+	$data[1][4] = color($sums->need,RED); //Required
+
+	$data[0][5] = color("Free",YELLOW);
+	$data[1][5] = color(round($user->balance->value-$sums->need,2),GREEN); //Free
+
+	if ($sums->used-($user->budget->value-$user->balance->value)>0)
+	{
+		$data[0][6] = "Saved";
+	}
+	else
+	{
+		$data[0][6] = "Overspend";
+	}
+	$data[1][6] = color($sums->used-($user->budget->value-$user->balance->value),NAVY); //Overspend/Saved
+
+
 	echo table ($data);
 	//echo "\n";
 
