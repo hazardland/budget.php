@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no; target-densityDpi=device-dpi"/>
+	<title>jQuery Mobile: Theme Download</title>
+	<link rel="stylesheet" href="scripts/jquery/hazardland.min.css" />
+	<link rel="stylesheet" href="scripts/jquery/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="scripts/jquery/jquery.mobile.structure.min.css" />
+	<script src="scripts/jquery/jquery.min.js"></script>
+	<script src="scripts/jquery/jquery.mobile.min.js"></script>
+	<script id="panel-init">
+		$(function() {
+			$("#menu").panel();
+			$("#menu [data-role='listview']").listview();
+		});
+	</script>
+</head>
+
+<body>
+
+	<div data-role="page" id="page1">
+
+		<div data-role="header">
+			<h1>Month</h1>
+		    <div data-role="navbar">
+		      <ul>
+		        <li><a href="#" class="ui-btn">OCT 1</a></li>
+		        <li><a href="#pagetwo">OCT 11</a></li>
+		        <li><a href="#pagetwo">DEC 3</a></li>
+		      </ul>
+		    </div>
+		</div>
+
+		<div data-role="main" class="ui-content">
+			<p>What a კარგი აპლიკაცა -_- </p>
+			<a href="#menu" class='ui-btn'>Open Pannel</a>
+		</div>
+
+        <div data-role="footer" data-position="fixed">
+        	<h1>You are doing fine</h1>
+        </div>
+	</div>
+
+	<div data-role="page" id="page2">
+
+		<div role="main" class="ui-content">
+			<h1>Page 2</h1>
+			<a href="#menu" class='ui-btn'>Open Pannel</a>
+		</div>
+
+	</div>
+
+	<div data-role="panel" id="menu" data-display="overlay" data-theme="a">
+		<h1>Hi!</h1>
+		<ul data-role="listview">
+			<li><a href="#page1" data-transition="flip">Month</a></li>
+			<li><a href="#page2" data-transition="flip">Page 2</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>
