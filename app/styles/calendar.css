@@ -59,6 +59,15 @@
 {
 	background-color: #101060;
 }
+.calendar .day.before .number
+{
+	background-color: black;
+}
+.calendar .day.crisis .number
+{
+	background-color: #2a0202;
+}
+
 .ui-btn.ui-btn-nocolor
 {
 	background:none;
