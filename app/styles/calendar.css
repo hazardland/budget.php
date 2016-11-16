@@ -1,6 +1,7 @@
 .calendar
 {
   text-align:center;
+  margin: 0px !important;
 }
 .calendar #day-1,
 .calendar #day-2,
@@ -11,21 +12,39 @@
 .calendar #day-7
 {
 	display:inline-block;
-	margin-left: 1px;
-	min-width: 13%;
+	width: 3.37em;
 	text-align: left;
 }
 .calendar .day-header
 {
+	color: #777f88;
 	background-color: #2323ac;
 	border: 1px solid black;
 	padding: 3px;
 	text-align: center;
 }
+.calendar #day-6 .day-header,
+.calendar #day-7 .day-header
+{
+	background-color: #ac3023;
+}
 .calendar .day
 {
 	margin-top: 2px;
 	border: 1px solid black;
-	padding: 3px;
-	text-align: left;
+	text-align: center;
+}
+.calendar .day .number
+{
+	font-size: 0.7em;
+	background-color: #171a21;
+	color: white;
+	padding: 1px;
+	margin: 0px;
+}
+.calendar .day .amount
+{
+	display: inline-block;
+	padding: 1px;
+	font-size: 0.9em;
 }
