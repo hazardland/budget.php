@@ -4,8 +4,8 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no; target-densityDpi=device-dpi"/>
-	<title>jQuery Mobile: Theme Download</title>
-	<link rel="stylesheet" href="scripts/jquery/hazardland.min.css" />
+	<title>Budget</title>
+	<link rel="stylesheet" href="scripts/jquery/hazardland.css" />
 	<link rel="stylesheet" href="scripts/jquery/jquery.mobile.icons.min.css" />
 	<link rel="stylesheet" href="scripts/jquery/jquery.mobile.structure.min.css" />
 	<script src="scripts/jquery/jquery.min.js"></script>
@@ -14,28 +14,32 @@
 		$(function() {
 			$("#menu").panel();
 			$("#menu [data-role='listview']").listview();
+			$("#menu").on ("panelbeforeopen", function(){
+				$("#menu a").removeClass("ui-btn-active");
+				$("#menu [data-role='listview'] [page='"+$.mobile.activePage.attr('id')+"']").addClass("ui-btn-active");
+			});
 		});
 	</script>
 </head>
 
 <body>
 
-	<div data-role="page" id="page1">
+	<div data-role="page" id="page1" class="page">
 
 		<div data-role="header">
-			<h1>Month</h1>
+                <a href="#menu" class="ui-btn ui-btn-left ui-icon-bars ui-btn-icon-notext"></a>
+                <h1>Page 1</h1>
 		    <div data-role="navbar">
 		      <ul>
 		        <li><a href="#" class="ui-btn">OCT 1</a></li>
-		        <li><a href="#pagetwo">OCT 11</a></li>
+		        <li><a href="#pagetwo" class="ui-btn-active">OCT 11</a></li>
 		        <li><a href="#pagetwo">DEC 3</a></li>
 		      </ul>
 		    </div>
 		</div>
 
 		<div data-role="main" class="ui-content">
-			<p>What a კარგი აპლიკაცა -_- </p>
-			<a href="#menu" class='ui-btn'>Open Pannel</a>
+			<p>We are on page 1</p>
 		</div>
 
         <div data-role="footer" data-position="fixed">
@@ -43,11 +47,16 @@
         </div>
 	</div>
 
-	<div data-role="page" id="page2">
+	<div data-role="page" id="page2" class="page">
+
+		<div data-role="header">
+                <a href="#menu" class="ui-btn ui-btn-left ui-icon-bars ui-btn-icon-notext"></a>
+                <h1>Page 2</h1>
+		</div>
+
 
 		<div role="main" class="ui-content">
-			<h1>Page 2</h1>
-			<a href="#menu" class='ui-btn'>Open Pannel</a>
+			<p>We are on page 2</p>
 		</div>
 
 	</div>
@@ -55,8 +64,8 @@
 	<div data-role="panel" id="menu" data-display="overlay" data-theme="a">
 		<h1>Hi!</h1>
 		<ul data-role="listview">
-			<li><a href="#page1" data-transition="flip">Month</a></li>
-			<li><a href="#page2" data-transition="flip">Page 2</a></li>
+			<li><a href="#page1" data-transition="fade" page="page1">Month</a></li>
+			<li><a href="#page2" data-transition="fade" page="page2">Page 2</a></li>
 		</ul>
 	</div>
 
