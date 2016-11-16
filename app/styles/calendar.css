@@ -55,3 +55,8 @@
 {
 	background-color: inherit;
 }
+.calendar .day.active .number
+{
+	background-color: #101060;
+
+}
