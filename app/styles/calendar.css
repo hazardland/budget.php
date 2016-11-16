@@ -1,0 +1,31 @@
+.calendar
+{
+  text-align:center;
+}
+.calendar #day-1,
+.calendar #day-2,
+.calendar #day-3,
+.calendar #day-4,
+.calendar #day-5,
+.calendar #day-6,
+.calendar #day-7
+{
+	display:inline-block;
+	margin-left: 1px;
+	min-width: 13%;
+	text-align: left;
+}
+.calendar .day-header
+{
+	background-color: blue;
+	border: 1px solid black;
+	padding: 3px;
+	text-align: center;
+}
+.calendar .day
+{
+	margin-top: 2px;
+	border: 1px solid black;
+	padding: 3px;
+	text-align: left;
+}
