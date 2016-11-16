@@ -47,3 +47,11 @@
 	padding: 1px;
 	font-size: 0.8em;
 }
+.calendar .day.empty
+{
+	border: 1px solid #212d36;
+}
+.calendar .day.empty .number
+{
+	background-color: inherit;
+}
