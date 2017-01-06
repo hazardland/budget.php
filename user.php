@@ -1,6 +1,6 @@
 <?php
 
-	$range = \budget\date::range ("2016-11-03","2016-12-01");
+	$range = \budget\date::range ("2016-12-30","2017-02-03");
 
 	/*
 		define your main currency
@@ -10,12 +10,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (1000);
+	budget (1097);
 
 	/*
 		Your balance
 	*/
-	balance (283.5);
+	balance (900);
 	//balance (779.8);
 
 	/*
