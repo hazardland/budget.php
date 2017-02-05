@@ -12,7 +12,7 @@
 	/*
 		Your monthly budget
 	*/
-	budget (842);
+	budget (861);
 
 	/*
 		Your balance
@@ -37,7 +37,7 @@
 	//daily expenses
 	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Go to work', [1,2,3,4,5]);
-	add ('GEL', 3, 'Smoke', 'Kent');
+	add ('GEL', 3.6, 'Smoke', 'Kent');
 	add ('GEL', 15.05, 'Food', 'Subway', [1,2,3,4,5]);
 	//add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5]);
 	//add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
@@ -58,7 +58,7 @@
 	add ('GEL', 20, 'Food', 'Pizza', [7]);
 
 	//monthly expenses
-	add ('GEL', 14, 'Interent', 'Github', X, [5]);
+	add ('GEL', 19, 'Interent', 'Github', X, [5]);
 
 	//medic
 	//add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [8]);
