@@ -1,7 +1,7 @@
 <?php
 
 	//$range = \budget\date::range ("2016-12-01","2016-12-30");
-	$range = \budget\date::range ("2017-02-03","2017-03-02");
+	$range = \budget\date::range ("2017-03-05","2017-04-04");
 
 
 	/*
@@ -12,12 +12,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (861);
+	budget (973);
 
 	/*
 		Your balance
 	*/
-	balance (291);
+	balance (275);
 	//balance (779.8);
 
 	/*
@@ -37,7 +37,7 @@
 	//daily expenses
 	//add ('GEL', 0.8, 'Marshrutka', 'Go to work', [1,2,3,4,5]);
 	add ('GEL', 5, 'Taxi', 'Go to work', [1,2,3,4,5]);
-	add ('GEL', 3.6, 'Smoke', 'Kent');
+	add ('GEL', 4, 'Smoke', 'Kent');
 	add ('GEL', 15.05, 'Food', 'Subway', [1,2,3,4,5]);
 	//add ('GEL', 2, 'Food', 'Evening food', [1,2,3,4,5]);
 	//add ('GEL', 0.8, 'Marshrutka', 'Back to home', [1,2,3,4,5]);
@@ -59,6 +59,9 @@
 
 	//monthly expenses
 	add ('GEL', 19, 'Interent', 'Github', X, [5]);
+
+	add ('GEL', 13, 'Internet', 'Ukve', X, [7], [3]);
+
 
 	//medic
 	//add ('GEL', 55, 'Medic', 'Eye doctor', X, [1], [8]);
