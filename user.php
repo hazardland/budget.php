@@ -17,7 +17,7 @@
 	/*
 		Your balance
 	*/
-	balance (275);
+	balance (212);
 	//balance (779.8);
 
 	/*
