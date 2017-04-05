@@ -1,7 +1,7 @@
 <?php
 
 	//$range = \budget\date::range ("2016-12-01","2016-12-30");
-	$range = \budget\date::range ("2017-03-05","2017-04-04");
+	$range = \budget\date::range ("2017-04-03","2017-05-03");
 
 
 	/*
@@ -12,12 +12,12 @@
 	/*
 		Your monthly budget
 	*/
-	budget (973);
+	budget (980);
 
 	/*
 		Your balance
 	*/
-	balance (212);
+	balance (910);
 	//balance (779.8);
 
 	/*
